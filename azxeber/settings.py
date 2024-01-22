@@ -19,6 +19,9 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 BUILTIN_APPS = [
+    # for requirements
+    "modeltranslation",
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -34,7 +37,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "django_cleanup.apps.CleanupConfig",
     "ckeditor",
-    "phonenumber_field"
+    "phonenumber_field",
 ]
 
 LOCAL_APPS = [
@@ -48,6 +51,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -105,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Baku'
 
@@ -160,3 +163,19 @@ SIMPLE_JWT = {
 
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+LANGUAGE_CODE = 'en'
+MODELTRANSLATION_DEFAULT_LANGUAGE = LANGUAGE_CODE
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    "default": ("en", )
+}
+
+
+LANGUAGES = (
+    ("en", "English"),
+    ("az", "Azerbaijan")
+)
+
+
+MODELTRANSLATION_LANGUAGES = ("en", "az")

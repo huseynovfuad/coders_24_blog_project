@@ -28,7 +28,8 @@ class BlogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = "__all__"
+        # fields = "__all__"
+        exclude = ("title_en", "title_az", "content_en", "content_az")
         extra_kwargs = {
             "user": {"read_only": True}
         }

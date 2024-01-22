@@ -4,6 +4,10 @@ from .models import Blog, BlogImage, Comment
 # Register your models here.
 
 
-admin.site.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ("id", "title")
+    list_display_links = ("id", "title")
+
+admin.site.register(Blog, BlogAdmin)
 admin.site.register(BlogImage)
 admin.site.register(Comment)

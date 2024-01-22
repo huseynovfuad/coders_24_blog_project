@@ -10,7 +10,7 @@ from .paginations import BlogPagination
 class BlogListView(generics.ListAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
-    pagination_class = BlogPagination
+    # pagination_class = BlogPagination
     # permission_classes = (IsOwnerOrReadOnly, )
 
 
