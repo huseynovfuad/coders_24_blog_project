@@ -66,7 +66,7 @@ ROOT_URLCONF = 'azxeber.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -162,7 +162,7 @@ SIMPLE_JWT = {
 }
 
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 LANGUAGE_CODE = 'en'
@@ -179,3 +179,11 @@ LANGUAGES = (
 
 
 MODELTRANSLATION_LANGUAGES = ("en", "az")
+
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "imajidigitalstudio2023@gmail.com"
+EMAIL_HOST_PASSWORD = "afnxblevqgjdwagw"
+EMAIL_POST = 587
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
