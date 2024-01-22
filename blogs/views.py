@@ -4,11 +4,14 @@ from .serializers import BlogSerializer, CommentSerializer
 from rest_framework.permissions import IsAuthenticated
 from .models import Blog, BlogImage, Comment
 from .permissions import IsOwnerOrReadOnly
+from .paginations import BlogPagination
 
 
 class BlogListView(generics.ListAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+    pagination_class = BlogPagination
+    # permission_classes = (IsOwnerOrReadOnly, )
 
 
 class BlogCreateView(generics.CreateAPIView):
@@ -35,15 +38,17 @@ class BlogDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwnerOrReadOnly, )
 
     def put(self, request, *args, **kwargs):
-        files = request.data.getlist("file")
-        serializer = self.serializer_class(data=request.data, context={"files": files})
+        obj = self.get_object()
+        files = request.data.getlist("file") or []
+        serializer = self.serializer_class(data=request.data, instance=obj, context={"files": files})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=201)
 
     def patch(self, request, *args, **kwargs):
+        obj = self.get_object()
         files = request.data.getlist("file")
-        serializer = self.serializer_class(data=request.data, partial=True, context={"files": files})
+        serializer = self.serializer_class(data=request.data, instance=obj, partial=True, context={"files": files})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=201)
